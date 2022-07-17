@@ -74,7 +74,7 @@ class AcGamePlayground {
         this.$playground.hide();
     }
 }
-class AcGame {
+export class AcGame {
     constructor(id) {
         this.id = id;
         this.$ac_game = $('#' + id);
