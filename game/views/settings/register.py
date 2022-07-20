@@ -25,7 +25,7 @@ def register(request):
     user = User(username=username)
     user.set_password(password)
     user.save()
-    Player.objects.create(user=user, photo="https://img2.baidu.com/it/u=2161949891,656888789&fm=26&fmt=auto")
+    Player.objects.create(user=user, photo="https://img1.baidu.com/it/u=1036729457,2402874960&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400")
     login(request, user)
     return JsonResponse({
         'result': "success",
