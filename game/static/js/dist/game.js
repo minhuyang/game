@@ -479,7 +479,7 @@ class Settings {
         </div>
         <br>
         <div class="ac-game-settings-acwing">
-            <img width="30" src="https://app2830.acapp.acwing.com.cn/static/image/settings/acwing_log.png">
+            <img width="30" src="https://app2830.acapp.acwing.com.cn/static/image/settings/acwing_logo.png">
             <br>
             <div>
                 AcWing一键登录
@@ -517,7 +517,7 @@ class Settings {
         </div>
         <br>
         <div class="ac-game-settings-acwing">
-            <img width="30" src="https://app2830.acapp.acwing.com.cn/static/image/settings/acwing_log.png">
+            <img width="30" src="https://app2830.acapp.acwing.com.cn/static/image/settings/acwing_logo.png">
             <br>
             <div>
                 AcWing一键登录
@@ -545,6 +545,8 @@ class Settings {
 
         this.$register.hide();
 
+        this.$acwing_login = this.$settings.find('.ac-game-settings-acwing img');
+
         this.root.$ac_game.append(this.$settings);
 
         this.start();
@@ -556,8 +558,13 @@ class Settings {
     }
 
     add_listening_events() {
+        let outer = this;
         this.add_listening_events_login();
         this.add_listening_events_register();
+
+        this.$acwing_login.click(function() {
+            outer.acwing_login();
+        });
     }
 
     add_listening_events_login() {
@@ -578,6 +585,19 @@ class Settings {
         });
         this.$register_submit.click(function() {
             outer.register_on_remote();
+        });
+    }
+
+    acwing_login() {
+        $.ajax({
+            url: "https://app2830.acapp.acwing.com.cn/settings/acwing/web/apply_code/",
+            type: "GET",
+            success: function(resp) {
+                console.log(resp);
+                if (resp.result === "success") {
+                    window.location.replace(resp.apply_code_url);
+                }
+            }
         });
     }
 
@@ -687,6 +707,7 @@ class Settings {
         this.$settings.show();
     }
 }
+
 export class AcGame {
     constructor(id, AcWingOS) {
         this.id = id;
